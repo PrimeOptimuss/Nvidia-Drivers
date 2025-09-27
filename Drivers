@@ -1,0 +1,55 @@
+vim /etc/pacman.conf:
+
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+
+sudo pacman -Syu
+
+DO THIS IF TTY SCREEN IS FLICKERING OR OFF SCALE:
+[vim /etc/default/grub
+
+GRUB_CMDLINE_LINUX_DEFAULT=" whatever it says here you just add space and write this: nvidia_drm.modeset=1"
+
+Then:
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+verify it's active:
+
+cat /sys/module/nvidia_drm/parameters/modeset
+
+It should return Y.]
+
+ensure use of mkinitcpio:
+
+ls /etc | grep -E 'mkinitcpio|dracut'
+
+sudo vim /etc/mkinitcpio.conf
+
+Add these to the MODULES= line:
+
+MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+
+Rebuild initramfs:
+
+sudo mkinitcpio -P
+
+reboot and do this:
+
+sudo vim ~/.bashrc:
+alias prime-run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only
+
+
+reload:
+source ~/.bashrc
+
+verify:
+glxinfo | grep "OpenGL renderer" # should show AMD
+
+prime-run glxinfo | grep "OpenGL renderer" #
+should show NVIDIA
+
+
+
+
+Sent from Proton Mail for Android.
