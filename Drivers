@@ -39,17 +39,11 @@ reboot and do this:
 sudo vim ~/.bashrc:
 alias prime-run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only
 
-
 reload:
 source ~/.bashrc
 
 verify:
-glxinfo | grep "OpenGL renderer" # should show AMD
+glxinfo | grep "OpenGL renderer"   should show AMD
 
-prime-run glxinfo | grep "OpenGL renderer" #
-should show NVIDIA
+prime-run glxinfo | grep "OpenGL renderer"  should show NVIDIA
 
-
-
-
-Sent from Proton Mail for Android.
