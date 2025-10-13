@@ -1,3 +1,5 @@
+#This is for hybrid setup. AMD GPU and Nvidia RTX GPU for example
+
 vim /etc/pacman.conf:
 [multilib]
 Include = /etc/pacman.d/mirrorlist
